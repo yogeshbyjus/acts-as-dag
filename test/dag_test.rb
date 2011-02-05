@@ -811,4 +811,32 @@ class DagTest < Test::Unit::TestCase
     b.reload
     assert !b.root_for_beta_nodes?
   end
+  #Tests that longest_path_between works
+  def test_longest_path_between
+    a = Node.create!
+    b = Node.create!
+    c = Node.create!
+    d = Node.create!
+    e = Default.create_edge(a,b)
+    e = Default.create_edge(b,c)
+    e = Default.create_edge(a,c)
+    e = Default.create_edge(c,d)
+    path = Default.longest_path_between(a,d)
+    assert_equal [b,c,d], path
+  end
+
+  #Tests that shortest_path_between works
+  def test_shortest_path_between
+    a = Node.create!
+    b = Node.create!
+    c = Node.create!
+    d = Node.create!
+    e = Default.create_edge(a,b)
+    e = Default.create_edge(b,c)
+    e = Default.create_edge(a,c)
+    e = Default.create_edge(c,d)
+    path = Default.shortest_path_between(a,d)
+    assert_equal [c,d], path
+  end
+
 end
