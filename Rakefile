@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -13,12 +13,12 @@ Rake::TestTask.new(:test) do |t|
 end
 
 desc 'Generate documentation for the acts_as_dag plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'ActsAsDag'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README.rdoc')
-  rdoc.rdoc_files.include('lib/dag/dag.rb')
+  rdoc.rdoc_files.include('lib/dag/*.rb')
 end
 
 # setup to build plugin as a gem
