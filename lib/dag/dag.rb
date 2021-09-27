@@ -81,7 +81,7 @@ module Dag
       belongs_to :ancestor, :foreign_key => ancestor_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
       belongs_to :descendant, :foreign_key => descendant_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
 
-      validates ancestor_id_column_name.to_sym, :uniqueness => {:scope => [descendant_id_column_name]}
+#       validates ancestor_id_column_name.to_sym, :uniqueness => {:scope => [descendant_id_column_name]}
 
       scope :with_ancestor, lambda { |ancestor| where(ancestor_id_column_name => ancestor.id) }
       scope :with_descendant, lambda { |descendant| where(descendant_id_column_name => descendant.id) }
