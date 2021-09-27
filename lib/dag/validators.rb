@@ -4,7 +4,7 @@ module Dag
   class CreateCorrectnessValidator < ActiveModel::Validator
 
     def validate(record)
-      record.errors[:base] << 'Link already exists between these points' if has_duplicates(record)
+#       record.errors[:base] << 'Link already exists between these points' if has_duplicates(record)
       record.errors[:base] << 'Link already exists in the opposite direction' if has_long_cycles(record)
       record.errors[:base] << 'Link must start and end in different places' if has_short_cycles(record)
       cnt = check_possible(record)
