@@ -2,6 +2,7 @@ module Dag
 
   #Sets up a model to act as dag links for models specified under the :for option
   def acts_as_dag_links(options = {})
+	  
     conf = {
             :ancestor_id_column => 'ancestor_id',
             :ancestor_type_column => 'ancestor_type',
@@ -56,6 +57,7 @@ module Dag
 
     #links to ancestor and descendant
     if acts_as_dag_polymorphic?
+	    byebug
       extend PolyColumns
       include PolyColumns
 
@@ -67,7 +69,7 @@ module Dag
 
       validates ancestor_type_column_name.to_sym, :presence => true
       validates descendant_type_column_name.to_sym, :presence => true
-      validates ancestor_id_column_name.to_sym, :uniqueness => {:scope => [ancestor_type_column_name, descendant_type_column_name, descendant_id_column_name]}
+#       validates ancestor_id_column_name.to_sym, :uniqueness => {:scope => [ancestor_type_column_name, descendant_type_column_name, descendant_id_column_name]}
 
       scope :with_ancestor, lambda { |ancestor| where(ancestor_id_column_name => ancestor.id, ancestor_type_column_name => ancestor.class.to_s) }
       scope :with_descendant, lambda { |descendant| where(descendant_id_column_name => descendant.id, descendant_type_column_name => descendant.class.to_s) }
@@ -78,6 +80,7 @@ module Dag
       extend Polymorphic
       include Polymorphic
     else
+	    byebug
       belongs_to :ancestor, :foreign_key => ancestor_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
       belongs_to :descendant, :foreign_key => descendant_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
 
