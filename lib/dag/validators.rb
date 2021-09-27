@@ -16,7 +16,8 @@ module Dag
 
     #check for duplicates
     def has_duplicates(record)
-      record.class.find_link(record.source, record.sink)
+        return false
+#       record.class.find_link(record.source, record.sink)
     end
 
     #check for long cycles
