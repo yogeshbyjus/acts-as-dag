@@ -57,7 +57,6 @@ module Dag
 
     #links to ancestor and descendant
     if acts_as_dag_polymorphic?
-	    byebug
       extend PolyColumns
       include PolyColumns
 
@@ -80,7 +79,6 @@ module Dag
       extend Polymorphic
       include Polymorphic
     else
-	    byebug
       belongs_to :ancestor, :foreign_key => ancestor_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
       belongs_to :descendant, :foreign_key => descendant_id_column_name, :class_name => acts_as_dag_options[:node_class_name]
 
